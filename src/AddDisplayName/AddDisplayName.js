@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 */
 
 export const withDisplayName = WrappedComponent => {
-  return class extends React.Component {
+  return class extends Component {
     static displayName = `HOC${
       WrappedComponent.displayName ? WrappedComponent.displayName : 'Component'
     }`;
