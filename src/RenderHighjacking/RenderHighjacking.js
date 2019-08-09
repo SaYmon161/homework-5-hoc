@@ -16,4 +16,21 @@ import React from 'react';
   стиль 'background: red'
 */
 
-//export const withRedBackground
+export const withRedBackground = WrappedComponent => {
+  return class Enhancer extends WrappedComponent {
+    render() {
+      const elementsTree = super.render();
+      let newProps = {};
+      if (elementsTree && elementsTree.type === 'button') {
+        newProps = { style: { background: 'red' } };
+      }
+      const props = Object.assign({}, elementsTree.props, newProps);
+      const newElementsTree = React.cloneElement(
+        elementsTree,
+        props,
+        elementsTree.props.children
+      );
+      return newElementsTree;
+    }
+  };
+};
